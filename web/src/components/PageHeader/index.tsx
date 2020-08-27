@@ -22,6 +22,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
 
             <div className="header-content">
                 <strong>{title}</strong>
+                {props.children}{/*Uso o props childre para imprimir os valores do componente filho*/} 
             </div>
         </header>
     )
