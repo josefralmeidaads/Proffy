@@ -6,7 +6,7 @@ import './styles.css';
 const TeacherList = () => {
     return(
         <div id="page-teacher-list" >
-            <PageHeader />
+            <PageHeader title="Estes são os proffys disponíveis."/>
         </div>
     )
 }
