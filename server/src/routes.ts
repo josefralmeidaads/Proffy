@@ -1,14 +1,19 @@
 import express from 'express';
+import db from './database/connections';
+import convertHourToMinutes from './utils/convertHourToMinutes';
+import ClassesControllers from './controllers/ClassesControllers';
+import handleCreateClasses from './controllers/ClassesControllers';
+import ConnectionsControllers from './controllers/ConnectionsControllers';
+
 const routes = express.Router();
 
-routes.get('/', (request, response) => {
-    return response.json({message: 'OPa!'});
-});
+const classesControllers = new ClassesControllers();
+const connectionsControllers = new ConnectionsControllers();
 
-routes.post('/users', (request, response) => {
-    const data = request.body;
-    
-    return response.json(data);
-});
+routes.post('/classes', classesControllers.create);
+routes.post('/connections', connectionsControllers.create);
+
+routes.get('/classes', classesControllers.index);
+routes.get('/connections', connectionsControllers.index);
 
 export default routes;

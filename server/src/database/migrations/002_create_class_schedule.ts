@@ -8,11 +8,11 @@ export async function up(knex: Knex){
         table.integer('from').notNullable();
         table.integer('to').notNullable();
 
-        table.integer('class_id')
+        table.integer('classes_id')
         .notNullable()
         .references('id')
         .inTable('classes')
-        .onUpdate('CaSCADE')
+        .onUpdate('CASCADE')
         .onDelete('CASCADE');
     });
 }

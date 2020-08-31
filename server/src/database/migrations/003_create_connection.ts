@@ -10,11 +10,11 @@ export async function up(knex: Knex){
         .notNullable()
         .references('id')
         .inTable('users')
-        .onUpdate('CaSCADE')
+        .onUpdate('CASCADE')
         .onDelete('CASCADE');
 
         table.timestamp('created_at') // quando a conexão for criada este campo será criado!
-        .defaultTo('now()')
+        .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
         .notNullable();
     });
 }

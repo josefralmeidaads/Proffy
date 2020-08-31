@@ -6,10 +6,11 @@ import backIcon from '../../assets/images/icons/back.svg'
 
 interface PageHeaderProps{ // isso e o mesmo que colocar props no parâmetro
     title: string;
+    description?: string;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = (props) => {
-    const { title } = props;
+    const { title, description } = props;
 
     return(
         <header className="page-header">
@@ -23,6 +24,9 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
             <div className="header-content">
                 <strong>{title}</strong>
                 {props.children}{/*Uso o props childre para imprimir os valores do componente filho*/} 
+                {description && /*Se minha descrição não estiver fazia imprima a descrição*/  
+                    <p>{description}</p>
+                }
             </div>
         </header>
     )
