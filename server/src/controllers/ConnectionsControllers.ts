@@ -8,7 +8,7 @@ export default class ConnectionsControllers {
 
                 const {total} = totalConexoes[0];
 
-                return response.status(302).json({message: 'Total de Conexões ' + total})
+                return response.status(200).json({total})
         }catch(error){
             console.log(error)
             return response.status(400).json({message: 'Nenhum resulrado encontrado!'})

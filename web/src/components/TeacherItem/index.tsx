@@ -2,34 +2,53 @@ import React from 'react';
 import './styles.css';
 
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
+import api from '../../services/api';
 
-const TeacherItem = () => {
+export interface Teacher{
+    id: number;
+    avatar: string;
+    bio: string;
+    cost: number;
+    name: string;
+    subject: string;
+    whatsapp: string;
+}
+
+interface TeacherItemProps{
+    teacher: Teacher 
+}
+
+const TeacherItem:React.FC<TeacherItemProps> = (props) => {
+    const { teacher } = props;
+
+    const createNewConnection = async() => {
+       await api.post('connections', {
+           user_id: teacher.id
+       });
+    }
+
     return(
-        <article className="teacher-item">
+        <article key={teacher.id} className="teacher-item">
                     <header>
-                        <img src="https://avatars1.githubusercontent.com/u/69639482?s=460&u=16ce5200e0562f44d5e8059ad80ed7d0f03fc9de&v=4" alt="Perfil Professor" />
+                        <img src={teacher.avatar} alt="Perfil Professor" />
                         <div>
-                            <strong>Larissa Toledo</strong>
-                            <span>Química</span>
+                            <strong>{teacher.name}</strong>
+                            <span>{teacher.subject}</span>
                         </div>
                     </header>
                     <p>
-                        Entusiasta das melhores teconologias de química avançada.
-                        <br /> <br />
-                        Apaixonada por explodir coisas em laboratório e por mudar a vida das
-                        pessoas através de experiências. Mais de 200.000 pessoas já passaram por uma
-                        das minhas explosões.
+                        {teacher.bio}
                     </p>
 
                     <footer>
                         <p>
                             Preço/Hora
-                            <strong>R$ 80,00</strong>
+                            <strong>R$ {teacher.cost}</strong>
                         </p>
-                        <button type="button">
+                        <a target="_blanck" onClick={createNewConnection} href={`https://wa.me/5532${teacher.whatsapp}`} type="button">
                             <img src={whatsappIcon} alt="ícone whatsapp"/>
                             Entrar em contato
-                        </button>
+                        </a>
                     </footer>
         </article>
     );
