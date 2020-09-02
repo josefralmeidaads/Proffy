@@ -1,11 +1,36 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 
+import giveClassesBgImage from '../../assets/images/give-classes-background.png';
+
 const GiveClasses = () => {
+
+    const { navigate } = useNavigation();
+
+    const handleNavigateToLanding = () => {
+        navigate('Landing');
+    }
+
     return(
-        <View>
-            
+        <View style={styles.container}>
+            <ImageBackground 
+                resizeMode="contain" 
+                source={giveClassesBgImage} 
+                style={styles.content}
+            >
+                <Text style={styles.title}>Quer ser um Proffy?</Text>
+                <Text style={styles.description}>
+                    Para começar, você precisa se cadastrar como professor  
+                    na nossa plataforma web! 
+                </Text>
+            </ImageBackground>
+
+            <RectButton onPress={handleNavigateToLanding} style={styles.okButton}>
+                <Text style={styles.okButtonText}>Tudo bem</Text>
+            </RectButton>
         </View>
     )
 }
