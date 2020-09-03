@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styles from './styles';
 import { View, Image, Text, ImageBackground } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler'
@@ -10,10 +10,11 @@ import giveClassesBgImage from '../../assets/images/give-classes-background.png'
 
 interface PageHeaderProps {
     title: string;
+    headerRight?: ReactNode; //Estou dizendo que posso passar um componente como uma propriedade
 }
 
 const PageHeader:React.FC<PageHeaderProps> = (props) => {
-    const { title, children } = props;
+    const { title, children, headerRight } = props;
     const { navigate } = useNavigation();
 
     const handleGoBack = () => {
@@ -29,7 +30,12 @@ const PageHeader:React.FC<PageHeaderProps> = (props) => {
                     <Image source={logoImg} resizeMode="contain"/>
             
             </View> 
-            <Text style={styles.title}>{title}</Text>
+
+            <View style={styles.header}>
+                <Text style={styles.title}>{title}</Text>
+                    {headerRight}
+            </View>
+             
             {children}    
         </View>
     )
