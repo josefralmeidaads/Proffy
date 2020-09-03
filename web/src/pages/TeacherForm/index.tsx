@@ -5,13 +5,17 @@ import warningIcon from '../../assets/images/icons/warning.svg'
 import Textarea from '../../components/Textarea';
 import Select from '../../components/Select';
 import { useHistory } from 'react-router-dom';
-
+import { Toast, ToastContainer, toast } from 'react-toastify'
 
 import './styles.css';
 import api from '../../services/api';
 
+toast.configure();
 
 const TeacherForm = () => {
+
+    
+
     //---------------Estados de Inputs---------------------------------------------------------------------------------
       const [name, setName] = useState('');
       const [avatar, setAvatar] = useState('');

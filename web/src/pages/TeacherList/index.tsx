@@ -4,12 +4,20 @@ import TeacherItem, { Teacher } from '../../components/TeacherItem';
 import Input from '../../components/Input';
 import Select from '../../components/Select';
 import api from '../../services/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './styles.css';
 
+toast.configure();
 
 
 const TeacherList = () => {
+
+    const notify = () => {
+        toast.error('Professor não encontrado!')
+    }
+
     const [teachers, setTeachers] = useState([]);
     const [subject, setSubject] = useState('');
     const [week_day,setWeek_day] = useState('');
@@ -18,15 +26,20 @@ const TeacherList = () => {
     const searchTeacher = async(e: FormEvent) => {
         e.preventDefault();
 
-       const response = await api.get('classes', {
-            params: {
-                subject,
-                week_day,
-                time
-            }
-        })
-
-        setTeachers(response.data);
+        try{
+            const response = await api.get('classes', {
+                params: {
+                    subject,
+                    week_day,
+                    time
+                }
+            })
+    
+            setTeachers(response.data);
+        }catch(erro){
+            notify();
+        }
+       
     }
     //--------------------------------------------------------------------------------------------------------------------------------------------------
     return(
